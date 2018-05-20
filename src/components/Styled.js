@@ -1,9 +1,28 @@
 import styled from 'emotion/react'
 import { Link } from 'react-router-dom'
 
+//Images
+import Framework from '../../assets/Framework.png'
+import LinkButton from '../../assets/linkButton.png'
+
+//Colors
+const blueColor = '#0ba6bb'
+const lightBlackColor = '#333333'
+const greyColor = '#d4d4d4'
+
+//JS
+let body = document.getElementsByTagName('body')[0]
+body.style.backgroundImage = `url(${Framework})`
+body.style.backgroundRepeat= 'no-repeat';
+body.style.backgroundAttachment = 'fixed';
+body.style.backgroundSize = 'cover'; 
+
+
 export const Body = styled.div`
   text-align: center;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  height: 100vh;
+  width: 100vw;
 `
 
 export const Title = styled.h1`
@@ -50,24 +69,44 @@ export const Message = styled.h2`
 
 export const Blue = styled.span`color: rgb(0, 128, 255);`
 
-export const FormTitle = styled.h1`
+export const FormTitle = styled.h4`
+  color: grey;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  color: #000;
+  text-align: left;
+  font-size: 20px;
   font-family: sans-serif;
-  font-weight: 100;
-  margin-top: 22vh;
-  margin-bottom: 50px;
-  @media (max-width: 500px) {
-    margin-top: 15vh;
-  }
+  font-weight: 400;
+`
+export const FormDescr = styled.h4`
+  color: grey;
+  margin: 0;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  padding: 0;
+  color: #000;
+  text-align: left;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: 400;
+`
+
+
+export const FormWrapper = styled.div`
+  width: 540px;
+  margin: auto;
+  padding: 15px;
+  background-color: white;
+  border-radius: 5px;
 `
 
 export const TextField = styled.input`
   display: block;
-  height: 42px;
-  width: 300px;
-  margin: 10px auto;
-  padding: 0 12px;
-  border-radius: 3px;
-  border: 1px solid lightgrey;
+  border: 2px solid ${greyColor};
+  width: ${props => props.center ? '297px' : '400px'};
+  padding: 5px;
   outline: none;
   font-size: 17px;
   box-sizing: border-box;
@@ -77,12 +116,48 @@ export const TextField = styled.input`
   }
 `
 
+export const TextLabel = styled.label`
+  display: block;
+  font-size: 16px;
+  color: ${lightBlackColor};
+  text-align: left;
+  width: ${props => props.checkbox ? 'auto' : '100%'};
+  float: left;
+  margin-top: ${props => props.checkbox ? '25px' : '15px'}; 
+  margin-bottom: ${props => props.checkbox ? '20px' : '5px'};
+  font-family: 'sans-serif';
+  font-family: sans-serif;
+  font-weight: 400;
+`
+
 export const Submit = styled.input`
   border: none;
-  color: rgb(0, 128, 255);
-  font-size: 24px;
-  background: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  background: ${blueColor};
   outline: none;
+  cursor: pointer;
+  margin-top: 25px;
+  padding: 10px 85px;
+  border-radius: 6px;
+`
+
+export const SignInLinkedin = styled.input`
+  background-image: url(${LinkButton});
+  width: 200px;
+  height: 40px;
+  background-size: contain;
+  outline: none;
+  background-repeat: no-repeat;
+  border: none;
+  color: white;
+  font-size: 14px;
+  padding-left: 43px;
+  padding-bottom: 1px;
+  font-family: sans-serif;
+  font-weight: 200;
   cursor: pointer;
   margin-top: 30px;
 `
@@ -100,4 +175,12 @@ export const FooterLink = styled(Link)`
   &:hover {
     color: rgb(0, 0, 0);
   }
+`
+
+export const CheckBox = styled.input`
+  display: inline-block;
+  float: left;
+  margin-top: 28px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 `

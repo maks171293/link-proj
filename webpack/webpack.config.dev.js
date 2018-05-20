@@ -29,6 +29,17 @@ module.exports = {
         include: [resolve(__dirname, '../src'), resolve(__dirname)],
         use: 'babel-loader',
       },
+      {
+        test: /\.(jpe?g|svg|png|gif)$/i,
+        use: [
+          'file-loader?name=public/assets/img/[name].[ext]'
+        ]
+      },
+      {
+        test:/\.css$/,
+        use:['style-loader','css-loader']
+    }
+
     ],
   },
   plugins: [

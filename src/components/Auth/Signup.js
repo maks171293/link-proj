@@ -2,25 +2,52 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import Logo from '../Logo'
+
 
 import { signup } from '../../actions'
 
-import { FormTitle, FooterLink } from '../Styled'
+import { Body, FormTitle, FooterLink, TextField, Submit, FormWrapper, TextLabel } from '../Styled'
 import Form from './Form'
 
-const Signup = ({ user, signup }) => {
+const Signup = ({ user, signup, location, match }) => {
   const handleSubmit = e => {
     e.preventDefault()
-    const { email: { value: email }, password: { value: password } } = e.target
-    signup({ email, password })
+    const {password1: {value: password1}, password2: {value: password2}} = e.target;
+    if(password1 !== password2){
+      alert('Passwords not match');
+      return;
+    }
+    let searchString = location.search;
+    let email = searchString.slice(searchString.indexOf('e=') + 2);
+    signup({email, password1});
   }
-
+  
   return (
     <div>
-      <FormTitle>Sign up</FormTitle>
-      <Form onSubmit={handleSubmit} />
-      <FooterLink to="/login">Already have an account ?</FooterLink>
-      {user.token && <Redirect to="/" />}
+    <Logo/>
+    <FormWrapper>
+      <FormTitle>Please setup your ClickedIn password</FormTitle>
+      <form onSubmit={handleSubmit}>
+        <TextLabel >New Password</TextLabel>
+        <TextField
+          type="password"
+          name="password1"
+          title="New Password"
+          required
+        />
+        <TextLabel >Confirm New Password</TextLabel>
+        <TextField
+          type="password"
+          name="password2"
+          title="Confirm New Password"
+          required
+        />
+        <Submit type="submit" value="Continue" />
+      </form>
+      {/* <FooterLink to="/login">Already have an account ?</FooterLink> */}
+      {user.token && <Redirect to="linkedin-connect" />}
+    </FormWrapper>
     </div>
   )
 }
