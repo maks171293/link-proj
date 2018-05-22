@@ -5,12 +5,12 @@ import { Redirect } from 'react-router-dom'
 import Logo from '../Logo'
 
 
-import { signup } from '../../actions'
+import { signup, changePassword } from '../../actions'
 
 import { Body, FormTitle, FooterLink, TextField, Submit, FormWrapper, TextLabel } from '../Styled'
 import Form from './Form'
 
-const Signup = ({ user, signup, location, match }) => {
+const Signup = ({ user, signup, location, match, changePassword }) => {
   const handleSubmit = e => {
     e.preventDefault()
     const {password1: {value: password1}, password2: {value: password2}} = e.target;
@@ -19,8 +19,9 @@ const Signup = ({ user, signup, location, match }) => {
       return;
     }
     let searchString = location.search;
-    let email = searchString.slice(searchString.indexOf('e=') + 2);
-    signup({email, password1});
+    let email = decodeURIComponent(searchString.slice(searchString.indexOf('e=') + 2));
+    console.log('aaa');
+    changePassword({email: email, password: password2});
   }
   
   return (
@@ -55,7 +56,8 @@ const Signup = ({ user, signup, location, match }) => {
 Signup.propTypes = {
   user: PropTypes.shape({}).isRequired,
   signup: PropTypes.func.isRequired,
+  changePassword: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({ user: state.user })
-export default connect(mapStateToProps, { signup })(Signup)
+export default connect(mapStateToProps, { signup, changePassword })(Signup)

@@ -180,7 +180,12 @@ export const FooterLink = styled(Link)`
 export const CheckBox = styled.input`
   display: inline-block;
   float: left;
-  margin-top: 28px;
   margin-right: 10px;
   margin-bottom: 10px;
+`
+
+export const HeaderWrapp = styled.div`
+  width: 100%;
+  height: 80px;
+  top: 0px;
 `

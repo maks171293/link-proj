@@ -5,22 +5,43 @@ import { Redirect } from 'react-router-dom'
 
 import { login } from '../../actions'
 
-import { FormTitle, FooterLink } from '../Styled'
+import { FormTitle, FooterLink, FormWrapper, TextLabel, TextField, Submit } from '../Styled'
 import Form from './Form'
+import Logo from '../Logo'
 
 const Login = ({ user, login }) => {
   const handleSubmit = e => {
     e.preventDefault()
     const { email: { value: email }, password: { value: password } } = e.target
-    login({ email, password })
+    // login({ email, password })
   }
 
   return (
     <div>
-      <FormTitle>Login</FormTitle>
-      <Form onSubmit={handleSubmit} />
-      <FooterLink to="/signup">{"You don't have an account ?"}</FooterLink>
-      {/* {user.token && <Redirect to="/" />} */}
+      <Logo />
+      <FormWrapper>
+      <FormTitle>Sign In</FormTitle>
+      <form onSubmit={this.handleSubmit}>
+        <TextLabel >Email Address</TextLabel>
+        <TextField
+          type="email"
+          name="email"
+          title="Email"
+          required
+        />
+        
+        <TextLabel >Password</TextLabel>
+        <TextField
+          type="password"
+          name="password"
+          title="Password"          
+          required
+        />
+        <Submit type="submit" value="Continue" />
+      </form>
+      </FormWrapper>
+      {/* <FooterLink to="/signup">{"You don't have an account ?"}</FooterLink> */}
+      {user.token && <Redirect to="/" />}
     </div>
   )
 }

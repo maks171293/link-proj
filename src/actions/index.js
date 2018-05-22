@@ -1,5 +1,5 @@
 import { actionTypes as types, urls } from '../constants'
-import { post } from '../helpers'
+import { post, postNA, get } from '../helpers'
 
 export const signup = ({ email, password }) => dispatch => {
   dispatch({ type: types.SIGNUP_REQUEST })
@@ -11,6 +11,31 @@ export const signup = ({ email, password }) => dispatch => {
     dispatch,
   })
 }
+
+export const changePassword = ({ email, password }) => dispatch => {
+  dispatch({ type: types.CHANGE_PASSWORD_REQUEST })
+  console.log('change password action', email, password)
+  postNA({
+    url: urls.CHANGE_PASSWORD,
+    body: { email, password },
+    success: types.CHANGE_PASSWORD_SUCCESS,
+    failure: types.CHANGE_PASSWORD_FAILURE,
+    dispatch,
+  })
+}
+
+export const linkedinConnect = ({ email, password, token }) => dispatch => {
+  dispatch({ type: types.LINKEDIN_CONNECT_REQUEST })
+  post({
+    url: urls.LINKEDIN_CREDS,
+    body: { linkedin_email: email, linkedin_password: password },
+    token: token,
+    success: types.LINKEDIN_CONNECT_SUCCESS,
+    failure: types.LINKEDIN_CONNECT_FAILURE,
+    dispatch,
+  })
+}
+
 
 export const login = ({ email, password }) => dispatch => {
   dispatch({ type: types.LOGIN_REQUEST })

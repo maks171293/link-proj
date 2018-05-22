@@ -16,100 +16,100 @@ import { signup } from '../../actions'
 import { FormTitle, FooterLink, TextField, Submit, FormWrapper, TextLabel } from '../Styled'
 
 let timezone = [
-	{value: 'one', label: 'One'},
-	{value: 'two', label: 'Two'}
+	{value: 'pt', label: 'Pacific Time'},
+	{value: 'mt', label: 'Mountain Time'},
+	{value: 'ct', label: 'Central Time'},
+	{value: 'et', label: 'Eastern Time'}
 ]
-
-let city = [
-	{value: 'city',label: 'City'},
-	{value: 'city1', label: 'city 2'}
-]
+let cities = {
+	pt: [
+		{value: 'losAngeles',label: 'Los Angeles'},
+		{value: 'sanJose', label: 'San Jose'},
+		{value: 'phoenix', label: 'Phoenix'},
+	],
+	mt: [
+		{value: 'denver', label: 'Denver'}
+	],
+	ct: [
+		{value: 'dallas', label: 'Dallas'},
+		{value: 'chicago', label: 'Chicago'}
+	],
+	et: [
+		{value: 'atlanta', label: 'Atlanta'},
+		{value: 'washington', label: 'Washington'},
+		{value: 'ashburn', label: 'Ashburn'},
+		{value: 'boston', label: 'Boston'},
+		{value: 'detroit', label: 'Detroit'},
+		{value: 'miami', label: 'Miami'},
+		{value: 'newJersey', label: 'New Jersey'}
+	]
+}
 
 class TimeZoneAndCity extends Component {
 	state = {
 		timezone: '',
 		city: '',
-		showProgressBar: false,
-		progressBarStatus: '0'
 	}
 	handleSubmit = e => {
 		e.preventDefault();
 		this.setState({
 			showProgressBar: true
 		})
-		this.progressBarHandle()
+		this.props.history.push('/verification-code')
 	}
 	handleTimezoneChange = (selectedOption) => {
-		
+		console.log('select', selectedOption)
+		this.setState({
+			timezone: selectedOption.value
+		})
 	}
 
 	handleCitySelect = (selectedOption) => {
-
+		this.setState({
+			city: selectedOption.value
+		})
 	}
 
 	componentWillUnmount(){
 		clearInterval(this.timer)
 	}
 
-	progressBarHandle = () => {
-		let a = true;
-		let seconds = 1000;
-		this.timer = setInterval(()=>{
-			let progressBarStatus = +this.state.progressBarStatus;
-			a = !a;
-			seconds = a === true ? 3000 : 5000;
-			let step = a === true ? 15 : 10;
-			this.setState({
-				progressBarStatus: progressBarStatus + step + ''
-			}, ()=>{
-				if(this.state.progressBarStatus >= 100){
-					clearInterval(this.timer);
-					this.props.history.push('/welcome', {user: 'Makson'})
-				}
-			})
-		}, seconds)
-	}
 
   render() {
     return (
 			<div>
-			<Logo/>
-      <FormWrapper>
-			{!this.state.showProgressBar ?
-				<div>
-				<FormTitle>Let's setup your timezone and city</FormTitle>
-        <form onSubmit={this.handleSubmit}>
-				<TextLabel>Timezone</TextLabel>
-				<div style={{width: '400px'}}>
-					<Select
-						className="select-input"
-						name="timezone"
-						value={this.state.timezone}
-						placeholder="This is my best timezone"
-						onChange={this.handleTimezoneChange}
-						options={timezone}
-					/>
-				</div>
-				<TextLabel>City</TextLabel>
-				<div style={{width: '400px'}}>
-					<Select
-						className="select-input"
-						name="city"
-						value={this.state.city}
-						placeholder="This is the nearest city"
-						onChange={this.handleCitySelect}
-						options={city}
-					/>
-				</div>
-					<Submit type="submit" value="Continue" />
-				</form>
-				</div> : 
-				<div style={{marginTop: '50px', marginBottom: '90px'}}>
-					<TextLabel style={{fontSize: '20px', marginBottom: '14px'}}>We’re creating your AI powered ClickedIn profile</TextLabel>
-					<Line percent={this.state.progressBarStatus} strokeWidth="4" strokeColor="#65e57b" trailWidth="5" strokeLinecap="square" trailColor="#a6a6a6" style={{borderRadius: '6px'}}/>
-				</div>
-	}
-      </FormWrapper>
+				<Logo/>
+				<FormWrapper>
+					<div>
+					<FormTitle>Let's setup your timezone and city</FormTitle>
+					<form onSubmit={this.handleSubmit}>
+					<TextLabel>Timezone</TextLabel>
+					<div style={{width: '400px'}}>
+						<Select
+							className="select-input"
+							name="timezone"
+							value={this.state.timezone}
+							placeholder="This is my best timezone"
+							onChange={this.handleTimezoneChange}
+							options={timezone}
+						/>
+					</div>
+					<TextLabel>City</TextLabel>
+					<div style={{width: '400px'}}>
+						<Select
+							disabled={this.state.timezone.length === 0 ? true : false}
+							className="select-input"
+							name="city"
+							value={this.state.city}
+							placeholder="This is the nearest city"
+							onChange={this.handleCitySelect}
+							options={cities[this.state.timezone]}
+						/>
+					</div>
+						<Submit type="submit" value="Continue" />
+					</form>
+					</div> 
+				</FormWrapper>
 			</div>
     )
   }

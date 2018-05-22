@@ -15,4 +15,4 @@ export const store = createStore(
 )
 
 store.subscribe(throttle(() => saveState(store.getState()), 1000))
-store.dispatch(loginWithToken())
+// store.dispatch(loginWithToken())
