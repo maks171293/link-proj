@@ -8,7 +8,7 @@ import Login from './Auth/Login'
 import Signup from './Auth/Signup'
 import LinkConnect from './Auth/LinkConnect'
 import TimeZoneAndCity from './Auth/TimeZoneAndCity'
-import Verification from './Auth/Verification';
+import Verification from './Auth/Verification'
 import Welcome from './Auth/Welcome'
 import Header from './Header'
 import { Body } from './Styled'

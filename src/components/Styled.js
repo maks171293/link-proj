@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 //Images
 import Framework from '../../assets/Framework.png'
 import LinkButton from '../../assets/linkButton.png'
+import SideMenuBG from '../../assets/sidebar_bg.png'
 
 //Colors
 const blueColor = '#0ba6bb'
@@ -184,8 +185,149 @@ export const CheckBox = styled.input`
   margin-bottom: 10px;
 `
 
+// Header
 export const HeaderWrapp = styled.div`
-  width: 100%;
-  height: 80px;
+  height: 64px;
   top: 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0ba6bb;
+  padding: 5px;
+  padding-left: 25px;
+  padding-right: 30px;
 `
+
+export const HeaderMenu = styled.div`
+  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+export const HeaderMenuText = styled.p`
+  color: white;
+  font-size: 14px;
+  font-weight: 100;
+  font-family: sans-serif;
+  padding-right: 10px;
+`
+
+//Sidebar
+export const SidebarWrapper = styled.div`
+  min-width: 265px;
+  background-color: #444;
+  background-image: url(${SideMenuBG});
+  height: calc(100vh - 74px);
+`
+
+export const SidebarItem = styled(Link)`
+  display: block;
+  width: 100%;
+  background-color: ${props => props.active ? 'white' : '#0ba6bb'};
+  margin-left: 8px;
+  text-align: left;
+  margin-top: 14px;
+  padding: 13;
+  padding-left: 10;
+  font-family: sans-serif;
+  font-size: 17.5px;
+  font-weight: 100;
+  cursor: pointer;
+  text-decoration: none;
+  color: ${ props => props.active ? 'black' : 'white' }
+`
+
+
+export const ContentWrapper = styled.div`
+  display: block;
+  display: flex;
+`
+
+export const Content = styled.div`
+  display: block;
+  background-color: #f8f8f8;
+  width: 100%;
+  padding: 17px;
+  padding-top: 10px;
+`
+
+//Dashboard
+
+export const DashboardHeader = styled.h3`
+  font-family: sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  padding: 0px;
+  margin: 0px;
+  text-align: left;
+  marginBottom: 10px;
+`
+
+export const BlockWrapper = styled.div`
+  border: 2px solid #d7d7d7;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: white;
+  padding-left: 15px;
+  display: flex;
+  flex-direction: ${props=>props.row ? 'row' : 'column'};
+  align-items: ${props => props.between ? 'space-between' : 'center'};
+  height: 100px;
+  margin-left: 0;
+`
+
+export const BlockHeaderWrapper = styled.div`
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const BlockHeader = styled.h4`
+  font-size: 20px;
+  font-weight: 400;
+  font-family: sans-serif;
+  text-align: left;
+  margin: 0;
+`
+
+export const BlockHeaderLink = styled.a`
+  font-size: 16px;
+  font-weight: 400;
+  font-family: sans-serif;
+  text-align: left;
+  margin: 0;
+  color: ${blueColor};
+  text-decoration: underline;
+`
+
+export const Button = styled.a`
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: sans-serif;
+  font-weight: lighter;
+  background: ${blueColor};
+  outline: none;
+  cursor: pointer;
+  padding: 10px 35px;
+  border-radius: 6px;
+`
+
+
+//Flex configs
+export const RowBlock = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const ColumnBlock = styled.div`
+  display: flex;
+  flex: 1;
+`
+
+
